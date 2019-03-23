@@ -91,8 +91,12 @@ class AddressController extends Controller
     {
         $address_id=$request->address_id;
         DB::beginTransaction();
+        $where=[
+            'u_id'=>session('u_id'),
+            'address_id'=>$address_id
+        ];
         $res1=Address::where('u_id',session('u_id'))->update(['is_default'=>2]);
-        $res=Address::where(['u_id'=>session('u_id'),'address_id'=>$address_id])->update(['is_default'=>1]);
+        $res=Address::where($where)->update(['is_default'=>1]);
         if($res&&$res1!==false){
             DB::commit();
             return 1;
