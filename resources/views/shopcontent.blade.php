@@ -190,12 +190,14 @@
                            
                 <div class="pro_foot"> 
                         <a href="" class="">第10364潮正在进行中<span class="dotting"></span></a>
-                        <a href="" class="shopping">立即参与</a>
-                        <span href="" class="fr"><i><b num="1">1</b></i></span>         
+                        <a href="javascript:;" id="buygoods" class="shopping">立即参与</a>
+                        <span href="" id="buy" class="fr"><i><b num="1">1</b></i></span>
                 </div>
             </div>
         </div>
     </div>
+    <input type="hidden" value="{{csrf_token()}}" id="_token">
+    <input type="hidden" value="{{$goodsinfo->goods_id}}" id="goods_id">
 @endsection
 
 
@@ -206,8 +208,27 @@
     <script src="{{url('js/photo.js')}}" charset="utf-8"></script>
     <script>
     $(function () {
+        layui.use('layer',function(){
+            $("#buy").click(function(){
+                var _this=$(this);
+                var goods_id=$('#goods_id').val();
+                var _token=$('#_token').val();
+                $.post(
+                    "{{url('shopcart/shopcart')}}",
+                    {goods_id:goods_id,_token:_token},
+                    function(res){
+                        if(res==1){
+                            layer.msg('添加成功',{icon:1});
+                        }else{
+                            layer.msg('添加失败',{icon:2});
+                        }
+                    }
+                )
+            })
+        })
         $('#div-header').css('display','none');
         $('#navigation').css('display','none');
+
         $('.hotimg').flexslider({
             directionNav: false,   //是否显示左右控制按钮   
             controlNav: true,   //是否显示底部切换按钮   

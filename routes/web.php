@@ -36,12 +36,26 @@ Route::get('login/','CartController@shopcart');
 Route::group(['middleware'=>'checklogin','prefix'=>'shopcart'],function(){
     Route::any('shopcart','CartController@shopcart');
     Route::any('cartdel','CartController@cartdel');
+    Route::any('buygoodsid','CartController@buygoodsid');
+    Route::any('payment','CartController@payment');
+    Route::any('paysuccess','CartController@paysuccess');
+});
+//地址
+Route::group(['middleware'=>'checklogin','prefix'=>'address'],function(){
+    Route::any('address','AddressController@address');
+    Route::any('addaddress','AddressController@addaddress');
+    Route::any('addressedit/{address_id?}','AddressController@addressedit');
+    Route::any('addressupdate','AddressController@addressupdate');
+    Route::any('addressdo','AddressController@addressdo');
+    Route::any('adddefault','AddressController@adddefault');
+    Route::any('addressdel','AddressController@addressdel');
 });
 
 //我的
-//Route::group(['middleware'=>'checklogin','prefix'=>'user'],function(){
-//    Route::get('userpage','IndexController@userpage');
-//});
+Route::group(['middleware'=>'checklogin','prefix'=>'user'],function(){
+    Route::get('edituser','UserController@edituser');
+    Route::get('quit','UserController@quit');
+});
 Route::get('user/userpage','LoginController@userpage');
 
 Route::get('VerifierController/verifier','VerifierController@verifier');

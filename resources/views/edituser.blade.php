@@ -8,8 +8,8 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link href="css/mywallet.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/mywallet.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <body>
     
@@ -31,7 +31,7 @@
                 <li>
                     <a href="">昵称</a>
                     <s class="fr"></s>
-                    <span class="fr">二大爷</span>
+                    <span class="fr">{{$userinfo->u_name}}</span>
                 </li>
                 <li>
                     <a href="">我的主页</a>
@@ -39,12 +39,12 @@
                 </li>
                 <li>
                     <a href="">手机号码</a>
-                    <span class="fr">400-666-2110</span>
+                    <span class="fr">{{$userinfo->u_name}}</span>
                 </li>           
             </ul>     
         </div>
         <div class="quit">
-            <a href="">退出登录</a>
+            <a href="{{url('user/quit')}}">退出登录</a>
         </div>
     </div>
 
@@ -57,6 +57,6 @@
         <li class="f_personal"><a href="/v45/member/index.do" ><i></i>我的潮购</a></li>
     </ul>
 </div>
-<script src="js/jquery-1.11.2.min.js"></script>
+<script src="{{url('js/jq.js')}}"></script>
 </body>
 </html>

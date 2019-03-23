@@ -20,14 +20,13 @@ class CartController extends Controller
             foreach($goodsinfo as $k=>$v){
                 $price+=intval(intval($v['self_price'])*intval($v['buy_number']));
             }
-
             return view('shopcart',['goodsinfo'=>$goodsinfo,'price'=>$price,'info'=>$info]);
         }else {
             $buy_number=$request->buy_number;
             if(empty($buy_number)){
-                echo $this->shopAdd($goods_id);
+                return $this->shopAdd($goods_id);
             }else{
-                $this->shopcartedit($goods_id,$buy_number);
+                return $this->shopcartedit($goods_id,$buy_number);
             }
         }
     }
@@ -35,29 +34,29 @@ class CartController extends Controller
     //加入购物车
     public function shopAdd($goods_id)
     {
-            $where=[
-                'u_id'=>session('u_id'),
-                'shop_cart.goods_id'=>$goods_id
-            ];
-            $cart=new Cart();
-            $arr=Cart::where($where)
-                ->join('shop_goods','shop_goods.goods_id','=','shop_cart.goods_id')
-                ->first(['goods_num','buy_number']);
-            //验证该用户是否加入过该商品
-            if(!empty($arr)){
-                //判断库存
-                if($arr['buy_number']+1<=$arr['goods_num']){
-                    $res=Cart::where($where)->update(['buy_number'=>$arr['buy_number']+1]);
-                }else{
-                    return  2;
-                }
+        $where=[
+            'u_id'=>session('u_id'),
+            'shop_cart.goods_id'=>$goods_id
+        ];
+        $cart=new Cart();
+        $arr=Cart::where($where)
+            ->join('shop_goods','shop_goods.goods_id','=','shop_cart.goods_id')
+            ->first(['goods_num','buy_number']);
+        //验证该用户是否加入过该商品
+        if(!empty($arr)){
+            //判断库存
+            if($arr['buy_number']+1<=$arr['goods_num']){
+                $res=Cart::where($where)->update(['buy_number'=>$arr['buy_number']+1]);
             }else{
-                //直接添加
-                $cart->u_id=session('u_id');
-                $cart->goods_id=$goods_id;
-                $cart->buy_number=1;
-                $res=$cart->save();
+                return  2;
             }
+        }else{
+            //直接添加
+            $cart->u_id=session('u_id');
+            $cart->goods_id=$goods_id;
+            $cart->buy_number=1;
+            $res=$cart->save();
+        }
 
 
         if($res){
@@ -82,20 +81,30 @@ class CartController extends Controller
             //修改
             if($buy_number<=$arr['goods_num']){
                 $res=Cart::where($where)->update(['buy_number'=>$buy_number]);
+                if($res){
+                    return 1;
+                }else{
+                    return 2;
+                }
             }else{
-                return  2;
+                return 2;
             }
         }
     }
 
+    //删除
     public function cartdel(Request $request)
     {
         $goods_id=$request->goods_id;
-        $where=[
-            'u_id'=>session('u_id'),
-            'goods_id'=>$goods_id
-        ];
-        $res=Cart::where($where)->delete();
+        $goods_id=explode(',',$goods_id);
+//        $where=[
+//            'u_id'=>session('u_id'),
+//            'goods_id'=>['in',$goods_id]
+//        ];
+        $cart=new Cart();
+        $res=$cart->where('u_id',session('u_id'))
+            ->whereIn('goods_id',$goods_id)
+            ->delete();
         if($res){
             echo 1;
         }else{
@@ -109,4 +118,38 @@ class CartController extends Controller
         $goods=new Goods();
         return $goods->limit(6)->get(['goods_id','goods_name','goods_img','self_price']);
     }
+
+    public function buygoodsid(Request $request)
+    {
+
+        $goods_id=$request->goods_id;
+        session(['goods_id'=>$goods_id]);
+        if(session('goods_id')!=''){
+            return 1;
+        }
+    }
+
+    //结算页面
+    public function payment()
+    {
+        $goods=new Goods();
+        $goods_id=explode(',',session('goods_id'));
+        $goodsinfo=$goods->where('u_id',session('u_id'))
+                    ->whereIn('shop_cart.goods_id',$goods_id)
+                    ->join('shop_cart','shop_cart.goods_id','=','shop_goods.goods_id')
+                    ->get(['self_price','buy_number','goods_name','goods_img']);
+        $price=0;
+        foreach($goodsinfo as $k=>$v){
+            $price+=intval(intval($v['self_price'])*intval($v['buy_number']));
+        }
+        return view('payment',['goodsinfo'=>$goodsinfo,'price'=>$price]);
+    }
+
+    //支付成功
+    public function paysuccess()
+    {
+        return view('paysuccess');
+    }
+
+
 }

@@ -411,7 +411,7 @@
 }
 .g-pay-lst {
 	position:relative;
-	background-color:#fff;
+	/*background-color:#fff;*/
 }
 .g-pay-lst>ul {
 	overflow:hidden;

@@ -2,6 +2,11 @@
 @extends('public')
 <!--触屏版内页头部-->
 @section('body')
+    <div class="m-block-header" id="div-header">
+        <strong id="m-title">登录</strong>
+        <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
+        <a href="/" class="m-index-icon"><i class="home-icon"></i></a>
+    </div>
 <div class="wrapper">
     <div class="registerCon">
         <div class="binSuccess5">

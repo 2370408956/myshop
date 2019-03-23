@@ -12,31 +12,27 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="{{url('layui/css/layui.css')}}">
-    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css"  id='pay'/>
     <link href="{{url('css/index.css')}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{url('css/mui.min_1.css')}}">
+    <link rel="stylesheet" href="{{url('css/mui.min_1.css')}}" id="indexgoods">
     <link href="{{url('css/goods.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/cartlist.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{url('css/member.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/member.css')}}" rel="stylesheet" type="text/css" id="paysuccess" />
 </head>
 <body fnav="1" class="g-acc-bg">
 <div class="page-group">
-    <div class="m-block-header" id="div-header">
-        <strong id="m-title">登录</strong>
-        <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-        <a href="/" class="m-index-icon"><i class="home-icon"></i></a>
-    </div>
+
     <div id="page-infinite-scroll-bottom" class="page">
-    @yield('body');
-    <div class="footer clearfix" id="navigation">
-        <ul>
-            <li class="f_home"><a href="{{url('/')}}" class="hover"><i></i>潮购</a></li>
-            <li class="f_announced"><a href="{{url('goods/allshops')}}" ><i></i>所有商品</a></li>
-            <li class="f_single"><a href="" ><i></i>home</a></li>
-            <li class="f_car"><a id="btnCart" href="{{url('shopcart/shopcart')}}" ><i></i>购物车</a></li>
-            <li class="f_personal"><a href="{{url('user/userpage')}}" ><i></i>我的潮购</a></li>
-        </ul>
-    </div>
+        @yield('body')
+        <div class="footer clearfix" id="navigation">
+            <ul>
+                <li class="f_home"><a href="{{url('/')}}" class="hover"><i></i>潮购</a></li>
+                <li class="f_announced"><a href="{{url('goods/allshops')}}" ><i></i>所有商品</a></li>
+                <li class="f_single"><a href="" ><i></i>home</a></li>
+                <li class="f_car"><a id="btnCart" href="{{url('shopcart/shopcart')}}" ><i></i>购物车</a></li>
+                <li class="f_personal"><a href="{{url('user/userpage')}}" ><i></i>我的潮购</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 </body>
