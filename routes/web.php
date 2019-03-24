@@ -49,12 +49,14 @@ Route::group(['middleware'=>'checklogin','prefix'=>'address'],function(){
     Route::any('addressdo','AddressController@addressdo');
     Route::any('adddefault','AddressController@adddefault');
     Route::any('addressdel','AddressController@addressdel');
+    Route::any('addressarea','AddressController@addressarea');
 });
 
 //我的
 Route::group(['middleware'=>'checklogin','prefix'=>'user'],function(){
     Route::get('edituser','UserController@edituser');
     Route::get('quit','UserController@quit');
+    Route::get('buyrecord','UserController@buyrecord');
 });
 Route::get('user/userpage','LoginController@userpage');
 

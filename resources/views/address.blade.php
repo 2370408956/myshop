@@ -34,7 +34,7 @@
                 <span class="fr">{{$v->address_tel}}</span>
             </li>
             <li>
-                <p>{{$v->address_area}}</p>
+                <p>{{$v->province}}{{$v->city}}{{$v->county}} &nbsp;&nbsp;&nbsp;&nbsp;{{$v->address_area}}</p>
             </li>
              <li class="a-set" address_id="{{$v->address_id}}">
                  @if($v->is_default==1)

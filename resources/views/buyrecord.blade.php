@@ -8,8 +8,8 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/buyrecord.css">
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url('css/buyrecord.css')}}">
    
     
 </head>
@@ -165,7 +165,7 @@
 </div>
 
 
-<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jq.js"></script>
 
 
 

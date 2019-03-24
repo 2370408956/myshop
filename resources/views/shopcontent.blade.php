@@ -209,6 +209,7 @@
     <script>
     $(function () {
         layui.use('layer',function(){
+            var layer=layui.layer;
             $("#buy").click(function(){
                 var _this=$(this);
                 var goods_id=$('#goods_id').val();
@@ -226,7 +227,7 @@
                 )
             })
         })
-        $('#div-header').css('display','none');
+        // $('#div-header').css('display','none');
         $('#navigation').css('display','none');
 
         $('.hotimg').flexslider({
