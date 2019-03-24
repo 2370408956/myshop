@@ -62,7 +62,7 @@
 <script src="{{url('dist/js/LArea.js')}}"></script>
 <script src="{{url('dist/js/LAreaData1.js')}}"></script>
 <script src="{{url('dist/js/LAreaData2.js')}}"></script>
-<script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
+<script src="{{url('js/jq.js')}}"></script>
 <script src="{{url('layui/layui.js')}}"></script>
 
 <script>
