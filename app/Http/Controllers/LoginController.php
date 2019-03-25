@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CheckForm;
+use App\Http\Requests\Checkpwd;
 use Illuminate\Http\Request;
 use App\Model\User;
 use App\Tools\Captcha;
+
 class LoginController extends Controller
 {
     //登录视图
@@ -121,5 +122,44 @@ class LoginController extends Controller
         var_dump(curl_exec($curl));
     }
 
+    //找回密码
+    public function findpwd()
+    {
+        return view('findpwd');
+    }
 
+    public function next(Request $request)
+    {
+        $tel=$request->tel;
+        $code=$request->code;
+        if($tel==session('mobile')&&$code==session('code')){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+
+    //修改密码试图
+    public function loginpwd(Request $request)
+    {
+        $info=$request->post();
+        if(empty($info)){
+            return view('mody-loginpwd');
+        }else{
+//            var_dump($info);die;
+//            echo session('u_id');die;
+            $u_pwd=User::where('u_name',session('mobile'))->first(['u_pwd']);
+            $u_pwd= decrypt($u_pwd['u_pwd']);
+            if($u_pwd!=$info['nowpwd']){
+                return '原密码错误';
+            }
+            $res=User::where('u_name',session('mobile'))->update(['u_pwd'=>encrypt($info['u_pwd'])]);
+            if($res){
+                return 1;
+            }else{
+                return '修改失败';
+            }
+
+        }
+    }
 }

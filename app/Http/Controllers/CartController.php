@@ -13,6 +13,7 @@ class CartController extends Controller
         $goods_id=$request->post('goods_id');
         if(empty($goods_id)){
             $goodsinfo=Cart::where('u_id',session('u_id'))
+                ->where('status',1)
                 ->join('shop_goods','shop_goods.goods_id','=','shop_cart.goods_id')
                 ->get(['goods_name','shop_cart.goods_id','buy_number','self_price','goods_img']);
             $info=$this->goodsinfo();
@@ -36,7 +37,8 @@ class CartController extends Controller
     {
         $where=[
             'u_id'=>session('u_id'),
-            'shop_cart.goods_id'=>$goods_id
+            'shop_cart.goods_id'=>$goods_id,
+            'status'=>1
         ];
         $cart=new Cart();
         $arr=Cart::where($where)
@@ -134,7 +136,7 @@ class CartController extends Controller
     {
         $goods=new Goods();
         $goods_id=explode(',',session('goods_id'));
-        $goodsinfo=$goods->where('u_id',session('u_id'))
+        $goodsinfo=$goods->where(['u_id'=>session('u_id'),'status'=>1])
                     ->whereIn('shop_cart.goods_id',$goods_id)
                     ->join('shop_cart','shop_cart.goods_id','=','shop_goods.goods_id')
                     ->get(['self_price','buy_number','goods_name','goods_img']);

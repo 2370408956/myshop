@@ -29,6 +29,9 @@ Route::prefix('login')->group(function(){
     Route::get('register','LoginController@register');
     Route::any('registerdo','LoginController@registerDo');
     Route::any('sendcode','LoginController@sendcode');
+    Route::any('findpwd','LoginController@findpwd');
+    Route::any('next','LoginController@next');
+    Route::any('loginpwd','LoginController@loginpwd');
 });
 
 Route::get('login/','CartController@shopcart');
@@ -57,6 +60,11 @@ Route::group(['middleware'=>'checklogin','prefix'=>'user'],function(){
     Route::get('edituser','UserController@edituser');
     Route::get('quit','UserController@quit');
     Route::get('buyrecord','UserController@buyrecord');
+});
+
+//订单
+Route::group(['middleware'=>'checklogin','prefix'=>'order'],function(){
+    Route::get('orderadd','OrderController@orderAdd');
 });
 Route::get('user/userpage','LoginController@userpage');
 
