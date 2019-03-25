@@ -271,7 +271,7 @@
             setTimeout($('.flexslider img').fadeIn());
             jQuery(document).ready(function() {
                 $("img.lazy").lazyload({
-                    placeholder : "images/loading2.gif",
+                    placeholder : "{{url('images/loading2.gif')}}",
                     effect: "fadeIn",
                 });
 

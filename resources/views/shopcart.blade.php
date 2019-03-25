@@ -198,6 +198,8 @@
                             function(res){
                                 if(res==1){
                                     location.href="{{url('shopcart/payment')}}";
+                                }else{
+                                    layer.msg('请选择一件商品',{icon:2});
                                 }
                             }
                         )

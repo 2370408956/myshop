@@ -31,7 +31,7 @@
         </div>
         <input type="hidden" value="{{csrf_token()}}" id="_token" name="_token">
         <div class="forget">
-            <a href="https://m.1yyg.com/v44/passport/FindPassword.do">忘记密码？</a><b></b>
+            <a href="{{url('login/findpwd')}}">忘记密码？</a><b></b>
             <a href="{{url('login/register')}}">新用户注册</a>
             {{--<a href="https://m.1yyg.com/v44/passport/register.do?forward=https%3a%2f%2fm.1yyg.com%2fv44%2fmember%2f">新用户注册</a>--}}
         </div>

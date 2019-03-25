@@ -9,6 +9,7 @@
 				<a href="" class="watch">查看潮购码</a>
 				<a href="{{url('goods/allshops')}}">继续潮购</a>
 			</div>
+			<a href="{{url('/')}}">返回首页</a>
 		</div>
 		 
 	</section>

@@ -8,9 +8,10 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link href="css/login.css" rel="stylesheet" type="text/css" />
-    <link href="css/find.css" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/login.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{url('css/find.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url('layui/css/layui.css')}}">
 </head>
 <body>
     
@@ -39,8 +40,69 @@
                 </li>
             </ul>
             <a id="btnLogin" href="javascript:;" class="orangeBtn loginBtn">下一步</a>
+            <input type="hidden" value="{{csrf_token()}}" id="_token">
         </div>
     </div>
 </div>
 </body>
 </html>
+<script src="{{url('js/jq.js')}}"></script>
+<script src="{{url('layui/layui.js')}}"></script>
+<script>
+    $(function(){
+        layui.use('layer',function(){
+            $('#btn').click(function(){
+                var tel=$('#txtAccount').val();
+                reg=/^1[34578]\d{9}$/;
+                if(tel==''){
+                    layer.msg('手机号不能为空',{icon:2});
+                    return false;
+                }else if(!reg.test(tel)){
+                    layer.msg('手机号不存在',{icon:2});
+                    return false;
+                }else{
+                    var _token=$('#_token').val();
+                    $.post(
+                        "{{url('login/sendcode')}}",
+                        {mobile:tel,_token:_token},
+                        function(res){
+                            console.log(res);
+                        }
+                    )
+                }
+            })
+
+            $('#btnLogin').click(function(){
+                reg=/^1[34578]\d{9}$/;
+                var tel=$('#txtAccount').val();
+                if(tel==''){
+                    layer.msg('手机号不能为空',{icon:2});
+                    return false;
+                }else if(!reg.test(tel)){
+                    layer.msg('手机号不存在',{icon:2});
+                    return false;
+                }
+                var code=$('#txtPassword').val();
+                if(code==''){
+                    layer.msg('验证码不能为空',{icon:2});
+                    return false;
+                }
+
+                $.get(
+                    "{{url('login/next')}}",
+                    {tel:tel,code:code},
+                    function(res){
+                        if(res==1){
+                            layer.msg('稍等,正在跳转',{icon:1,time:1000},function(){
+                                location.href="{{url('login/loginpwd')}}"
+                            });
+                        }else{
+                            layer.msg('验证码或手机错误',{icon:2});
+                        }
+                    }
+                )
+            })
+        })
+
+    })
+</script>

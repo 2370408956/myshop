@@ -42,11 +42,11 @@
             	<b class="z-set"></b>第三方支付<em class="orange fr"><span class="colorbbb">需要支付&nbsp;</span><b>￥</b>{{$price}}</em>
             </a>
             <div class="net-pay">
-                <a href="javascript:;" class="checked" id="jdPay">
+                <a href="javascript:;" pay_way="1" class="jdPay checked" class="jdPay">
                 	<span class="zfb"></span>
                 	<b class="z-set"></b>
                 </a>
-                <a href="javascript:;" id="jdPay">
+                <a href="javascript:;" pay_way="2" class="jdPay">
                 	<span class="kq"></span>
                 	<b class="z-set"></b>
                 </a>
@@ -93,10 +93,23 @@
 @section('my-js')
         <script>
                 $('#navigation').css('display','none');
-                $('#div-header').css('display','none');
 
                 $('#confirm').click(function(){
-                    location.href="{{url('shopcart/paysuccess')}}"
+                    var pay_way=$("a[class='jdPay checked']").attr('pay_way');
+                    $.get(
+                        "{{url('order/orderadd')}}",
+                        {pay_way:pay_way},
+                        function(res){
+                            if(res==1){
+                                layer.msg('购买成功',{icon:1,time:2000},function(){
+                                    location.href="{{url('shopcart/paysuccess')}}";
+                                });
+                            }else{
+                                layer.msg(res,{icon:2});
+                            }
+                        }
+                    )
+                    {{--location.href="{{url('shopcart/paysuccess')}}"--}}
                 })
             $(document).ready(function(){
                 var total=0;
