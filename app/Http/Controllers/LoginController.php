@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Checkpwd;
+use App\Http\Requests\CheckForm;
 use Illuminate\Http\Request;
 use App\Model\User;
 use App\Tools\Captcha;
