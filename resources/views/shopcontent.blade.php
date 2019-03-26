@@ -80,69 +80,69 @@
 
                 <div class="ann_btn partcon" id="tabs-container">
                     <div class="swiper-wrapper">
-                        <div class="record-wrapp swiper-slide">
-                             <!--所有参与记录-->
-                            <div class="part-record">
-                                <div class="ann_list">
-                                    <div class="fl">
-                                        <img src="{{url('images/goods2.jpg')}}" alt="">
-                                    </div>
-                                    <div class="fl">
-                                        <h3>被小冉</h3>
-                                        <p>2017-06-25 15:38:12:645</p>
-                                    </div>
-                                    <div class="fr people-num">
-                                        <span>16人次</span><s class="fr"></s>
-                                    </div>
-                                </div>  
-                                <div class="ann_list">
-                                    <div class="fl">
-                                        <img src="{{url('images/goods2.jpg')}}" alt="">
-                                    </div>
-                                    <div class="fl">
-                                        <h3>被小冉</h3>
-                                        <p>2017-06-25 15:38:12:645</p>
-                                    </div>
-                                    <div class="fr people-num">
-                                        <span>16人次</span><s class="fr"></s>
-                                    </div>
-                                </div>      
-                                <div class="ann_list">
-                                    <div class="fl">
-                                        <img src="{{url('images/goods2.jpg')}}" alt="">
-                                    </div>
-                                    <div class="fl">
-                                        <h3>被小冉</h3>
-                                        <p>2017-06-25 15:38:12:645</p>
-                                    </div>
-                                    <div class="fr people-num">
-                                        <span>16人次</span><s class="fr"></s>
-                                    </div>
-                                </div>  
-                                <div class="ann_list">
-                                    <div class="fl">
-                                        <img src="{{url('images/goods2.jpg')}}" alt="">
-                                    </div>
-                                    <div class="fl">
-                                        <h3>被小冉</h3>
-                                        <p>2017-06-25 15:38:12:645</p>
-                                    </div>
-                                    <div class="fr people-num">
-                                        <span>16人次</span><s class="fr"></s>
-                                    </div>
-                                </div>     
-                            </div>
-                            <!-- 无内容时显示 -->
-                            <div class="nocontent" style="display: none">
-                                <div class="m_buylist m_get">
-                                    <ul id="ul_list">
-                                        <div class="noRecords colorbbb clearfix">
-                                            <s class="default"></s>您还没有参与记录哦~
-                                        </div>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="record-wrapp swiper-slide">--}}
+                             {{--<!--所有参与记录-->--}}
+                            {{--<div class="part-record">--}}
+                                {{--<div class="ann_list">--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<h3>被小冉</h3>--}}
+                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fr people-num">--}}
+                                        {{--<span>16人次</span><s class="fr"></s>--}}
+                                    {{--</div>--}}
+                                {{--</div>  --}}
+                                {{--<div class="ann_list">--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<h3>被小冉</h3>--}}
+                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fr people-num">--}}
+                                        {{--<span>16人次</span><s class="fr"></s>--}}
+                                    {{--</div>--}}
+                                {{--</div>      --}}
+                                {{--<div class="ann_list">--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<h3>被小冉</h3>--}}
+                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fr people-num">--}}
+                                        {{--<span>16人次</span><s class="fr"></s>--}}
+                                    {{--</div>--}}
+                                {{--</div>  --}}
+                                {{--<div class="ann_list">--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fl">--}}
+                                        {{--<h3>被小冉</h3>--}}
+                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="fr people-num">--}}
+                                        {{--<span>16人次</span><s class="fr"></s>--}}
+                                    {{--</div>--}}
+                                {{--</div>     --}}
+                            {{--</div>--}}
+                            {{--<!-- 无内容时显示 -->--}}
+                            {{--<div class="nocontent" style="display: none">--}}
+                                {{--<div class="m_buylist m_get">--}}
+                                    {{--<ul id="ul_list">--}}
+                                        {{--<div class="noRecords colorbbb clearfix">--}}
+                                            {{--<s class="default"></s>您还没有参与记录哦~--}}
+                                        {{--</div>--}}
+                                    {{--</ul>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <!--历史获得者 -->
                         <div class="history-winwrapp mb48 swiper-slide">
