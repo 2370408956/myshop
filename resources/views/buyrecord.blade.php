@@ -10,8 +10,10 @@
     <meta content="telephone=no" name="format-detection" />
     <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{url('css/buyrecord.css')}}">
-   
-    
+    <link href="{{url('css/cartlist.css')}}" rel="stylesheet" type="text/css" />
+
+
+
 </head>
 <body>
     
@@ -20,6 +22,32 @@
     <strong id="m-title">潮购记录</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
     <a href="/" class="m-index-icon"><i class="buycart"></i></a>
+</div>
+<div class="g-Cart-list">
+    <ul id="cartBody">
+        @foreach($goodsinfo as $v)
+            <li goods_id="{{$v->goods_id}}" class="li" self_price="{{$v->self_price}}" buy_number="{{$v->buy_number}}">
+                <s class="xuan current"></s>
+                <a class="fl u-Cart-img" href="{{url("goods/shopcontent/$v->goods_id")}}">
+                    <img src="/images/{{$v->goods_img}}" border="0" alt="暂无图片">
+                </a>
+                <div class="u-Cart-r">
+                    <a href="/v44/product/12501977.do" class="gray6">{{$v->goods_name}}</a>
+                    <span class="gray9">
+                            <em>价格{{$v->self_price}}</em>
+                        </span>
+                    {{--<div class="num-opt">--}}
+                        已购买{{$v->buy_number}}
+                        {{--<em class="num-mius less min" ><i></i></em>--}}
+                        {{--<input class="text_box" name="num" maxlength="6" type="text" value="{{$v->buy_number}}" codeid="12501977">--}}
+                        {{--<em class="num-add add"><i></i></em>--}}
+                    {{--</div>--}}
+                    {{--<a href="javascript:;" name="delLink" cid="12501977"  isover="0" class="z-del"><s></s></a>--}}
+                </div>
+            </li>
+        @endforeach
+    </ul>
+    <div id="divNone" class="empty "  style="display: none"><s></s><p>您的购物车还是空的哦~</p><a href="https://m.1yyg.com" class="orangeBtn">立即潮购</a></div>
 </div>
 <div class="recordwrapp" style="display: none">
     <div class="buyrecord-con clearfix">
@@ -63,9 +91,9 @@
 <div class="nocontent">
     <div class="m_buylist m_get">
         <ul id="ul_list">
-            <div class="noRecords colorbbb clearfix">
-                <s class="default"></s>您还没有购买商品哦~
-            </div>
+            {{--<div class="noRecords colorbbb clearfix">--}}
+                {{--<s class="default"></s>您还没有购买商品哦~--}}
+            {{--</div>--}}
             <div class="hot-recom">
                 <div class="title thin-bor-top gray6">
                     <span><b class="z-set"></b>人气推荐</span>
