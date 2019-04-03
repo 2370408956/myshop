@@ -6,10 +6,9 @@
 			<span><i></i></span>
 			<p>支付成功，请耐心等待揭晓结果！</p>
 			<div class="pay-btn">
-				<a href="" class="watch">查看潮购码</a>
+				<a href="{{url('/')}}" class="watch">返回首页</a>
 				<a href="{{url('goods/allshops')}}">继续潮购</a>
 			</div>
-			<a href="{{url('/')}}">返回首页</a>
 		</div>
 		 
 	</section>

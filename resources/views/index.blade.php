@@ -99,11 +99,11 @@
 					<p>倒计时</p>
 					<div class="pro-state">
 						<div class="time-wrapper time" value="1500560400">
-							<em>02</em>
+							<em class="h">{{$time['h']}}</em>
 							<span>:</span>
-							<em>24</em>
+							<em class="i">{{$time['i']}}</em>
 							<span>:</span>
-							<em><i>8</i><i>4</i></em>
+							<em><i class="s">{{$time['s']}}</i></em>
 						</div>
 					</div>
 				</li>
@@ -112,11 +112,11 @@
 					<p>倒计时</p>
 					<div class="pro-state">
 						<div class="time-wrapper time" value="1500560400">
-							<em>02</em>
+							<em class="h">{{$time['h']}}</em>
 							<span>:</span>
-							<em>24</em>
+							<em class="i">{{$time['i']}}</em>
 							<span>:</span>
-							<em><i>8</i><i>4</i></em>
+							<em><i class="s">{{$time['s']}}</i></em>
 						</div>
 					</div>
 				</li>
@@ -125,11 +125,11 @@
 					<p>倒计时</p>
 					<div class="pro-state">
 						<div class="time-wrapper time" value="1500560400">
-							<em>02</em>
+							<em class="h">{{$time['h']}}</em>
 							<span>:</span>
-							<em>24</em>
+							<em class="i">{{$time['i']}}</em>
 							<span>:</span>
-							<em><i>8</i><i>4</i></em>
+							<em><i class="s">{{$time['s']}}</i></em>
 						</div>
 					</div>
 				</li>
@@ -138,11 +138,11 @@
 					<p>倒计时</p>
 					<div class="pro-state">
 						<div class="time-wrapper time"  value="1500560400">
-							<em>02</em>
+							<em class="h">{{$time['h']}}</em>
 							<span>:</span>
-							<em>24</em>
+							<em class="i">{{$time['i']}}</em>
 							<span>:</span>
-							<em><i>8</i><i>4</i></em>
+							<em><i class="s">{{$time['s']}}</i></em>
 						</div>
 					</div>
 				</li>
@@ -238,6 +238,38 @@
 	<script>
 
         $(function () {
+            setInterval(time,1000);
+
+            function time(){
+                $('.s').each(function(){
+                    var s=parseInt($(this).text());
+                    if(s==0){
+                        $(this).text('59');
+                        // var i=parseInt($('.i').text());
+                        // console.log(i);
+                        // i=i-1;
+                        // $('.i').text(i);
+					}else{
+                        s=s-1;
+                        $(this).text(s);
+					}
+                });
+                // $('.i').each(function(){
+                //     var s=parseInt($(this).text());
+                //     var i=parseInt($(this).text());
+                //     if(s==0){
+                //         i=i-1;
+                //         $(this).text(i);
+                //     }
+                // })
+			}
+			function i(){
+                $('.i').each(function(){
+                    var i=parseInt($(this).text());
+                    i=i-1;
+                    $(this).text(i);
+				})
+			}
             $("#indexgoods").attr('href','');
             $('.gRate').click(function(){
                 var _this=$(this);
@@ -250,7 +282,9 @@
                         if(res==1){
                             layer.msg('添加成功',{icon:1});
                         }else{
-                            layer.msg('添加失败',{icon:2});
+                            layer.msg('请先登录',{icon:2,time:2000},function () {
+								location.href="{{url('login/login')}}"
+                            });
                         }
                     }
                 )

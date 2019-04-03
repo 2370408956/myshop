@@ -18,7 +18,7 @@
                     <ul class="Pro-bar-li">
                         <li class="P-bar01"><em>{{$v->buy_num}}</em>已购买</li>
                         {{--<li class="P-bar02"><em>7988</em>总需人次</li>--}}
-                        <li class="P-bar03"><em>{{$v->goods_num-$v->buy_num}}</em>剩余</li>
+                        <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                     </ul>
                 </div>
                 <a codeid="12785750" class="addcart" canbuy="646"><s></s></a>

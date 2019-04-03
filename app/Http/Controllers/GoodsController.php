@@ -13,11 +13,11 @@ class GoodsController extends Controller
     {
         $cate=Cate::where('pid',0)->get();
         if(empty($cate_id)){
-            $goodsinfo=Goods::orderBy('buy_num','desc')->get();
+            $goodsinfo=Goods::orderBy('goods_num','desc')->get();
         }else{
             $cateinfo=Cate::get();
             $c_id=soncateinfo($cateinfo,$cate_id);
-            $goodsinfo=Goods::whereIn('cate_id',$c_id)->orderBy('buy_num','desc')->get();
+            $goodsinfo=Goods::whereIn('cate_id',$c_id)->orderBy('goods_num','desc')->get();
         }
         return view('allshops',['cateinfo'=>$cate,'goodsinfo'=>$goodsinfo,'cate_id'=>$cate_id]);
     }
@@ -33,7 +33,7 @@ class GoodsController extends Controller
         $cateinfo=Cate::get();
         $c_id=soncateinfo($cateinfo,$cate_id);
         if($nav==1){
-            $field='buy_num';
+            $field='goods_num';
             $asc='desc';
         }else if($nav==2){
             $field='buy_num';

@@ -10,7 +10,7 @@
         <div class="m-block-header" id="div-header">
             <strong id="m-title">商品详情</strong>
             <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-            <a href="/" class="m-index-icon"><i class="m-public-icon"></i></a>
+            <a href="{{url('shopcart/shopcart')}}" class="m-index-icon">购物车</a>
         </div>
 
                 <!-- 焦点图 -->
@@ -20,7 +20,7 @@
                         <ul class="slides" style="width: 600%; transition-duration: 0.4s; transform: translate3d(-828px, 0px, 0px);">
                             @foreach($goodsinfo->goods_imgs as $k=>$v)
                             <li style="width: 414px; float: left; display: block;" class="clone">
-                                <a href="">
+                                <a href="/images/{{$v}}">
                                     <img src="/images/{{$v}}" alt="">
                                 </a>
                             </li>
@@ -28,6 +28,7 @@
                         </ul>
                     </section>
                 </div>
+            <input type="hidden" value="{{$goodsinfo->goods_id}}" id="goods_id">
                 <!-- 产品信息 -->
                 <div class="pro_info">
                     <h2 class="gray6">
@@ -80,69 +81,7 @@
 
                 <div class="ann_btn partcon" id="tabs-container">
                     <div class="swiper-wrapper">
-                        {{--<div class="record-wrapp swiper-slide">--}}
-                             {{--<!--所有参与记录-->--}}
-                            {{--<div class="part-record">--}}
-                                {{--<div class="ann_list">--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<h3>被小冉</h3>--}}
-                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fr people-num">--}}
-                                        {{--<span>16人次</span><s class="fr"></s>--}}
-                                    {{--</div>--}}
-                                {{--</div>  --}}
-                                {{--<div class="ann_list">--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<h3>被小冉</h3>--}}
-                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fr people-num">--}}
-                                        {{--<span>16人次</span><s class="fr"></s>--}}
-                                    {{--</div>--}}
-                                {{--</div>      --}}
-                                {{--<div class="ann_list">--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<h3>被小冉</h3>--}}
-                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fr people-num">--}}
-                                        {{--<span>16人次</span><s class="fr"></s>--}}
-                                    {{--</div>--}}
-                                {{--</div>  --}}
-                                {{--<div class="ann_list">--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<img src="{{url('images/goods2.jpg')}}" alt="">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fl">--}}
-                                        {{--<h3>被小冉</h3>--}}
-                                        {{--<p>2017-06-25 15:38:12:645</p>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="fr people-num">--}}
-                                        {{--<span>16人次</span><s class="fr"></s>--}}
-                                    {{--</div>--}}
-                                {{--</div>     --}}
-                            {{--</div>--}}
-                            {{--<!-- 无内容时显示 -->--}}
-                            {{--<div class="nocontent" style="display: none">--}}
-                                {{--<div class="m_buylist m_get">--}}
-                                    {{--<ul id="ul_list">--}}
-                                        {{--<div class="noRecords colorbbb clearfix">--}}
-                                            {{--<s class="default"></s>您还没有参与记录哦~--}}
-                                        {{--</div>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+
 
                         <!--历史获得者 -->
                         <div class="history-winwrapp mb48 swiper-slide">
@@ -190,14 +129,13 @@
                            
                 <div class="pro_foot"> 
                         <a href="" class="">第10364潮正在进行中<span class="dotting"></span></a>
-                        <a href="javascript:;" id="buygoods" class="shopping">立即参与</a>
+                        <a href="{{url("shopcart/payment/$goodsinfo->goods_id")}}" id="buypay" class="shopping">立即参与</a>
                         <span href="" id="buy" class="fr"><i><b num="1">1</b></i></span>
                 </div>
             </div>
         </div>
     </div>
     <input type="hidden" value="{{csrf_token()}}" id="_token">
-    <input type="hidden" value="{{$goodsinfo->goods_id}}" id="goods_id">
 @endsection
 
 
@@ -226,6 +164,25 @@
                     }
                 )
             })
+
+            {{--$('#buypay').click(function(){--}}
+                {{--var goods_id='';--}}
+                {{--var _this = $(this);--}}
+                {{--var _token=$('#_token').val();--}}
+                {{--var goods_id=$('#goods_id').val();--}}
+                {{--$.post(--}}
+                    {{--"{{url('shopcart/buygoodsid')}}",--}}
+                    {{--{goods_id:goods_id,_token:_token},--}}
+                    {{--function(res){--}}
+                        {{--if(res==1){--}}
+                            {{--location.href="{{url('shopcart/payment]\--}}
+                            {{--}}";--}}
+                        {{--}else{--}}
+                            {{--layer.msg('请选择一件商品',{icon:2});--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--)--}}
+            {{--})--}}
         })
         // $('#div-header').css('display','none');
         $('#navigation').css('display','none');

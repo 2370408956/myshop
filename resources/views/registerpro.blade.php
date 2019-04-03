@@ -139,6 +139,7 @@
                 var u_pwd=$('#u_pwd').val();
                 var u_pwd_confirmation=$('#u_pwd_confirmation').val();
                 var _token=$('#_token').val();
+                var reg=/^.{6,}$/;
                 if(tel==''){
                     layer.msg('账号不能为空',{icon:2});
                     return false;
@@ -150,9 +151,15 @@
                 if(u_pwd==''){
                     layer.msg('密码不能为空',{icon:2});
                     return false;
+                }else if(!reg.test(u_pwd)){
+                    layer.msg('密码应6位以上',{icon:2});
+                    return false;
                 }
                 if(u_pwd_confirmation==''){
                     layer.msg('确认密码不能为空',{icon:2});
+                    return false;
+                }else if(u_pwd!=u_pwd_confirmation){
+                    layer.msg('2次密码不一致',{icon:2});
                     return false;
                 }
 

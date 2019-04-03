@@ -18,7 +18,12 @@
                             <dt>
                                 {{$v->goods_name}}
                             </dt>
-                            <dd><em class="price"> {{$v->buy_number}}</em>/<em>￥{{$v->self_price}}</em></dd>
+                            <dd><em class="price">
+                                    @if($v->buy_number=='')
+                                        1
+                                    @else{{$v->buy_number}}
+                                    @endif</em>/
+                                <em>￥{{$v->self_price}}</em></dd>
                         </dl>
                     </a>
                 </li>
@@ -53,7 +58,7 @@
             </div>
             <div class="paylip">我们提倡理性消费</div>
         </div>
-    <a style="display: inline-block; border-radius:20px; text-align: center; background: red; width: 375px;" id="btnPay" href="javascript:;" class="orangeBtn fr w_account">立即支付</a>
+    <a style="display: inline-block; border-radius:20px; text-align: center; background: red; width: 375px;" id="btnPay" href="{{url('aliyun/aliyun')}}" class="orangeBtn fr w_account">立即支付</a>
     {{--<div class="g-Total-bt">--}}
             {{--<dd></dd>--}}
         {{--</div>--}}
@@ -94,23 +99,21 @@
         <script>
                 $('#navigation').css('display','none');
 
-                $('#confirm').click(function(){
-                    var pay_way=$("a[class='jdPay checked']").attr('pay_way');
-                    $.get(
-                        "{{url('order/orderadd')}}",
-                        {pay_way:pay_way},
-                        function(res){
-                            if(res==1){
-                                layer.msg('购买成功',{icon:1,time:2000},function(){
-                                    location.href="{{url('shopcart/paysuccess')}}";
-                                });
-                            }else{
-                                layer.msg(res,{icon:2});
-                            }
-                        }
-                    )
-                    {{--location.href="{{url('shopcart/paysuccess')}}"--}}
-                })
+                {{--$('#btnPay').click(function(){--}}
+                    {{--var pay_way=$("a[class='jdPay checked']").attr('pay_way');--}}
+                    {{--$.get(--}}
+                        {{--"{{url('order/getinfo')}}",--}}
+                        {{--{pay_way:pay_way},--}}
+                        {{--function(res){--}}
+                            {{--if(res.code==1){--}}
+                               {{--location.href="{{url('aliyun/aliyun/')}}"+'/'+res.str;--}}
+                            {{--}else{--}}
+                                {{--layer.msg(res,{icon:2});--}}
+                            {{--}--}}
+                        {{--},--}}
+                        {{--'json'--}}
+                    {{--)--}}
+                {{--})--}}
             $(document).ready(function(){
                 var total=0;
                 // console.log($('.g-pay-lst li').length);
@@ -223,13 +226,13 @@
             });
 
 
-            $('#btnPay').click(function(){
-                layer.open({
-                    type: 1,
-                    title: false,
-                    content: $('.paywrapp')
-                })
-            })
+            // $('#btnPay').click(function(){
+            //     layer.open({
+            //         type: 1,
+            //         title: false,
+            //         content: $('.paywrapp')
+            //     })
+            // })
 
         </script>
 @endsection

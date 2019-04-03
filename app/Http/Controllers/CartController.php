@@ -15,7 +15,7 @@ class CartController extends Controller
             $goodsinfo=Cart::where('u_id',session('u_id'))
                 ->where('status',1)
                 ->join('shop_goods','shop_goods.goods_id','=','shop_cart.goods_id')
-                ->get(['goods_name','shop_cart.goods_id','buy_number','self_price','goods_img']);
+                ->get(['goods_name','shop_cart.goods_id','buy_number','self_price','goods_img','goods_num']);
             $info=$this->goodsinfo();
             $price=0;
             foreach($goodsinfo as $k=>$v){
@@ -59,8 +59,6 @@ class CartController extends Controller
             $cart->buy_number=1;
             $res=$cart->save();
         }
-
-
         if($res){
             return 1;
         }else{
@@ -121,6 +119,7 @@ class CartController extends Controller
         return $goods->limit(6)->get(['goods_id','goods_name','goods_img','self_price']);
     }
 
+    //保存要购买的商品id
     public function buygoodsid(Request $request)
     {
 
@@ -132,18 +131,28 @@ class CartController extends Controller
     }
 
     //结算页面
-    public function payment()
+    public function payment($goods_id='')
     {
-        $goods=new Goods();
-        $goods_id=explode(',',session('goods_id'));
-        $goodsinfo=$goods->where(['u_id'=>session('u_id'),'status'=>1])
-                    ->whereIn('shop_cart.goods_id',$goods_id)
-                    ->join('shop_cart','shop_cart.goods_id','=','shop_goods.goods_id')
-                    ->get(['self_price','buy_number','goods_name','goods_img']);
         $price=0;
-        foreach($goodsinfo as $k=>$v){
-            $price+=intval(intval($v['self_price'])*intval($v['buy_number']));
+        if($goods_id==''){
+            $goods=new Goods();
+            $goods_id=explode(',',session('goods_id'));
+            $goodsinfo=$goods->where(['u_id'=>session('u_id'),'status'=>1])
+                ->whereIn('shop_cart.goods_id',$goods_id)
+                ->join('shop_cart','shop_cart.goods_id','=','shop_goods.goods_id')
+                ->get(['self_price','buy_number','goods_name','goods_img']);
+            foreach($goodsinfo as $k=>$v){
+                $price+=intval(intval($v['self_price'])*intval($v['buy_number']));
+            }
+        }else{
+            $goodsinfo=Goods::where('goods_id',$goods_id)->get(['self_price','goods_name','goods_img']);
+            session('goods_id',$goods_id);
+            $this->shopAdd($goods_id);
+            foreach($goodsinfo as $k=>$v){
+                $price+=intval(intval($v['self_price'])*intval(1));
+            }
         }
+
         return view('payment',['goodsinfo'=>$goodsinfo,'price'=>$price]);
     }
 

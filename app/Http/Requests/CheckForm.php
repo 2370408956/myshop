@@ -31,7 +31,8 @@ class CheckForm extends FormRequest
             ],
             'u_pwd'=>[
                 'required',
-                'confirmed'
+                'confirmed',
+                'regex:/^.{6,}$/'
             ],
             'u_pwd_confirmation'=>'required'
         ];

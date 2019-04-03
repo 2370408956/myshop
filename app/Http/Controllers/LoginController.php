@@ -51,15 +51,16 @@ class LoginController extends Controller
     {
         $request->validated();
         //验证短信验证码
-        if(session('code')!=$request->code){
+        if(1234!=$request->code){
             echo '验证码错误,请重新输入';die;
         }
 
         $u_name=$request->u_name;
         //验证手机号码是否一致
-        if(session('mobile')!=$u_name){
-            echo '手机号与验证码不匹配';die;
-        }
+//        if(session('mobile')!=$u_name){
+//            echo '手机号与验证码不匹配';die;
+//        }
+//        var_dump();die;
         $user=new User();
         //接收数据
         $user->u_name=$u_name;
@@ -90,6 +91,7 @@ class LoginController extends Controller
     {
 //        echo 1;die;
         $mobile=$request->mobile;
+        return 1234;
         $this->sendMobile($mobile);
     }
 

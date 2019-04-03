@@ -10,10 +10,12 @@ class IndexController extends Controller
     //首页
     public function index()
     {
-//        echo session('u_id');die;
+        $time['h']=2;
+        $time['i']=45;
+        $time['s']=1;
         $info=Goods::limit(8)->get();
         $cateinfo=Cate::where('pid',0)->limit(5)->get();
-        return view('index',['info'=>$info,'cateinfo'=>$cateinfo]);
+        return view('index',['info'=>$info,'cateinfo'=>$cateinfo,'time'=>$time]);
     }
 
 

@@ -70,7 +70,7 @@
                             默认
                         </a>
                     </li>
-                    <li orderflag="20" class="nav " type="2">
+                    <li orderflag="20" class="nav" type="2">
                         <a href="javascript:;">
                             人气
                         </a>
@@ -98,7 +98,9 @@
                                         </a>
                                     </span>
                                 <div class="gList_r">
+                                    <a href="{{url("goods/shopcontent/$v->goods_id")}}">
                                     <h3 class="gray6">{{$v->goods_name}}</h3>
+                                    </a>
                                     <em class="gray9">价值：￥{{$v->self_price}}</em>
                                     <div class="gRate">
                                         <div class="Progress-bar">
@@ -110,7 +112,7 @@
                                             <ul class="Pro-bar-li">
                                                 <li class="P-bar01"><em>{{$v->buy_num}}</em>已购买</li>
                                                 {{--<li class="P-bar02"><em>7988</em>总需人次</li>--}}
-                                                <li class="P-bar03"><em>{{$v->goods_num-$v->buy_num}}</em>剩余</li>
+                                                <li class="P-bar03"><em>{{$v->goods_num}}</em>剩余</li>
                                             </ul>
                                         </div>
                                         <a codeid="12785750" class="addcart" canbuy="646"><s></s></a>

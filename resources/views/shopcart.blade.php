@@ -6,20 +6,21 @@
     <div>
         <!--首页头部-->
         <div class="m-block-header">
+            <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
             <a href="/" class="m-public-icon m-1yyg-icon"></a>
-            <a href="/" class="m-index-icon">编辑</a>
+            {{--<a href="" class="m-index-icon">编辑</a>--}}
         </div>
         <!--首页头部 end-->
         <div class="g-Cart-list">
             <ul id="cartBody">
                 @foreach($goodsinfo as $v)
-                    <li goods_id="{{$v->goods_id}}" class="li" self_price="{{$v->self_price}}" buy_number="{{$v->buy_number}}">
+                    <li goods_id="{{$v->goods_id}}" class="li" self_price="{{$v->self_price}}" goods_num="{{$v->goods_num}}" buy_number="{{$v->buy_number}}">
                         <s class="xuan current"></s>
                         <a class="fl u-Cart-img" href="{{url("goods/shopcontent/$v->goods_id")}}">
                             <img src="/images/{{$v->goods_img}}" border="0" alt="暂无图片">
                         </a>
                         <div class="u-Cart-r">
-                            <a href="/v44/product/12501977.do" class="gray6">{{$v->goods_name}}</a>
+                            <a href="{{url("goods/shopcontent/$v->goods_id")}}" class="gray6">{{$v->goods_name}}</a>
                             <span class="gray9">
                             <em>价格{{$v->self_price}}</em>
                         </span>
@@ -91,16 +92,21 @@
                     $('#div-header').css('display','none');
                     $('.less').click(function(){
                         var _this=$(this);
+                        var goods_num=_this.parents('li').attr('goods_num');
                         var buy_number=parseInt(_this.next('input').val())-1;
                         var goods_id=_this.parents('li').attr('goods_id');
                         var _token=$('#_token').val();
-                        $.post(
-                            "{{url('shopcart/shopcart')}}",
-                            {goods_id:goods_id,_token:_token,buy_number:buy_number},
-                            function(res){
-                                GetCount();
-                            }
-                        )
+                        if(buy_number>=1){
+                            _this.next('input').val(buy_number);
+                            $.post(
+                                "{{url('shopcart/shopcart')}}",
+                                {goods_id:goods_id,_token:_token,buy_number:buy_number},
+                                function(res){
+                                    GetCount();
+                                }
+                            )
+                        }
+
                     });
 
                     //全选删除
@@ -157,13 +163,21 @@
                         var buy_number=parseInt(_this.prev('input').val())+1;
                         var goods_id=_this.parents('li').attr('goods_id');
                         var _token=$('#_token').val();
-                        $.post(
-                            "{{url('shopcart/shopcart')}}",
-                            {goods_id:goods_id,_token:_token,buy_number:buy_number},
-                            function(res){
-                                GetCount();
-                            }
-                        )
+                        var goods_num=_this.parents('li').attr('goods_num');
+                        if(buy_number<goods_num){
+                            _this.prev().val(buy_number);
+                            $.post(
+                                "{{url('shopcart/shopcart')}}",
+                                {goods_id:goods_id,_token:_token,buy_number:buy_number},
+                                function(res){
+                                    GetCount();
+                                }
+                            )
+                        }else{
+                            _this.prev().val(goods_num);
+                            layer.msg('库存不足了，还剩'+goods_num+'件了',{icon:2});
+                        }
+
                     })
 
                     //文本框
@@ -172,6 +186,17 @@
                         var buy_number=parseInt(_this.val());
                         var goods_id=_this.parents('li').attr('goods_id');
                         var _token=$('#_token').val();
+                        var goods_num=parseInt(_this.parents('li').attr('goods_num'));
+                        // console.log(goods_num);
+                        if(buy_number<1){
+                            _this.val(1);
+                            buy_number=1;
+                        }else if(buy_number<goods_num){
+                            _this.val(buy_number);
+                        }else{
+                            _this.val(goods_num);
+                            buy_number=goods_num;
+                        }
                         $.post(
                             "{{url('shopcart/shopcart')}}",
                             {goods_id:goods_id,_token:_token,buy_number:buy_number},
@@ -210,18 +235,18 @@
             </script>
             <script type="text/javascript">
                 $(function () {
-                    $(".add").click(function () {
-                        var t = $(this).prev();
-                        t.val(parseInt(t.val()) + 1);
-                        GetCount();
-                    })
-                    $(".min").click(function () {
-                        var t = $(this).next();
-                        if(t.val()>1){
-                            t.val(parseInt(t.val()) - 1);
-                            GetCount();
-                        }
-                    })
+                    // $(".add").click(function () {
+                    //     var t = $(this).prev();
+                    //     t.val(parseInt(t.val()) + 1);
+                    //     GetCount();
+                    // })
+                    // $(".min").click(function () {
+                    //     var t = $(this).next();
+                    //     if(t.val()>1){
+                    //         t.val(parseInt(t.val()) - 1);
+                    //         GetCount();
+                    //     }
+                    // })
                 })
             </script>
             <script>
