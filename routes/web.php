@@ -12,85 +12,85 @@
 */
 
 
-//Route::any('/','IndexController@index');
-//
-//
-//Route::any('login/login','LoginController@login');
-////商品
-//Route::prefix('goods')->group(function(){
-//    Route::get('goodsinfo','GoodsController@goodsInfo');
-//    Route::get('shopcontent/{id}','GoodsController@shopcontent');
-//    Route::get('categoods/{id}','GoodsController@categoods');
-//    Route::any('allshops/{id?}','GoodsController@allshops');
-//});
-////登录
-//Route::prefix('login')->group(function(){
-//    Route::get('login','LoginController@login');
-//    Route::get('register','LoginController@register');
-//    Route::any('registerdo','LoginController@registerDo');
-//    Route::any('sendcode','LoginController@sendcode');
-//    Route::any('findpwd','LoginController@findpwd');
-//    Route::any('next','LoginController@next');
-//    Route::any('loginpwd','LoginController@loginpwd');
-//});
-//
-//Route::get('login/','CartController@shopcart');
-////购物车
-//Route::group(['middleware'=>'checklogin','prefix'=>'shopcart'],function(){
-//    Route::any('shopcart','CartController@shopcart');
-//    Route::any('cartdel','CartController@cartdel');
-//    Route::any('buygoodsid/{goods_id?}','CartController@buygoodsid');
-//    Route::any('payment/{type?}','CartController@payment');
-//    Route::any('paysuccess','CartController@paysuccess');
-//});
-////地址
-//Route::group(['middleware'=>'checklogin','prefix'=>'address'],function(){
-//    Route::any('address','AddressController@address');
-//    Route::any('addaddress','AddressController@addaddress');
-//    Route::any('addressedit/{address_id?}','AddressController@addressedit');
-//    Route::any('addressupdate','AddressController@addressupdate');
-//    Route::any('addressdo','AddressController@addressdo');
-//    Route::any('adddefault','AddressController@adddefault');
-//    Route::any('addressdel','AddressController@addressdel');
-//    Route::any('addressarea','AddressController@addressarea');
-//});
-//
-////我的
-//Route::group(['middleware'=>'checklogin','prefix'=>'user'],function(){
-//    Route::get('edituser','UserController@edituser');
-//    Route::get('quit','UserController@quit');
-//    Route::get('buyrecord','UserController@buyrecord');
-//});
-//
-////订单
-//Route::group(['middleware'=>'checklogin','prefix'=>'order'],function(){
-//    Route::get('orderadd','OrderController@orderAdd');
-////    Route::get('onepay','OrderController@onepay');
-//    Route::get('getinfo','OrderController@getinfo');
-//});
-//
-////阿里云
-//Route::prefix('aliyun')->group(function(){
-//    Route::any('aliyun/{demo?}','OrderController@aliyun');
-//    Route::any('sync','OrderController@sync');
-//    Route::post('async','OrderController@async');
-//});
-//Route::get('user/userpage','LoginController@userpage');
-//
-//Route::get('VerifierController/verifier','VerifierController@verifier');
-//
-//
-//Route::prefix('demo')->group(function(){
-//    Route::any('index','DemoController@index');
-//});
-//Route::get('test','DemoController@test');
+Route::any('/','IndexController@index');
+
+
+Route::any('login/login','LoginController@login');
+//商品
+Route::prefix('goods')->group(function(){
+    Route::get('goodsinfo','GoodsController@goodsInfo');
+    Route::get('shopcontent/{id}','GoodsController@shopcontent');
+    Route::get('categoods/{id}','GoodsController@categoods');
+    Route::any('allshops/{id?}','GoodsController@allshops');
+});
+//登录
+Route::prefix('login')->group(function(){
+    Route::get('login','LoginController@login');
+    Route::get('register','LoginController@register');
+    Route::any('registerdo','LoginController@registerDo');
+    Route::any('sendcode','LoginController@sendcode');
+    Route::any('findpwd','LoginController@findpwd');
+    Route::any('next','LoginController@next');
+    Route::any('loginpwd','LoginController@loginpwd');
+});
+
+Route::get('login/','CartController@shopcart');
+//购物车
+Route::group(['middleware'=>'checklogin','prefix'=>'shopcart'],function(){
+    Route::any('shopcart','CartController@shopcart');
+    Route::any('cartdel','CartController@cartdel');
+    Route::any('buygoodsid/{goods_id?}','CartController@buygoodsid');
+    Route::any('payment/{type?}','CartController@payment');
+    Route::any('paysuccess','CartController@paysuccess');
+});
+//地址
+Route::group(['middleware'=>'checklogin','prefix'=>'address'],function(){
+    Route::any('address','AddressController@address');
+    Route::any('addaddress','AddressController@addaddress');
+    Route::any('addressedit/{address_id?}','AddressController@addressedit');
+    Route::any('addressupdate','AddressController@addressupdate');
+    Route::any('addressdo','AddressController@addressdo');
+    Route::any('adddefault','AddressController@adddefault');
+    Route::any('addressdel','AddressController@addressdel');
+    Route::any('addressarea','AddressController@addressarea');
+});
+
+//我的
+Route::group(['middleware'=>'checklogin','prefix'=>'user'],function(){
+    Route::get('edituser','UserController@edituser');
+    Route::get('quit','UserController@quit');
+    Route::get('buyrecord','UserController@buyrecord');
+});
+
+//订单
+Route::group(['middleware'=>'checklogin','prefix'=>'order'],function(){
+    Route::get('orderadd','OrderController@orderAdd');
+//    Route::get('onepay','OrderController@onepay');
+    Route::get('getinfo','OrderController@getinfo');
+});
+
+//阿里云
+Route::prefix('aliyun')->group(function(){
+    Route::any('aliyun/{demo?}','OrderController@aliyun');
+    Route::any('sync','OrderController@sync');
+    Route::post('async','OrderController@async');
+});
+Route::get('user/userpage','LoginController@userpage');
+
+Route::get('VerifierController/verifier','VerifierController@verifier');
+
+
+Route::prefix('demo')->group(function(){
+    Route::any('index','DemoController@index');
+});
+Route::get('test','DemoController@test');
 
 
 
 
-Route::get('index','Demo\UserController@index');
-Route::get('sendcode','Demo\UserController@sendcode');
-Route::post('useradd','Demo\UserController@useradd');
-Route::get('login','Demo\UserController@login');
-Route::post('logindo','Demo\UserController@logindo');
-Route::any('userlist','Demo\UserController@userlist');
+//Route::get('index','Demo\UserController@index');
+//Route::get('sendcode','Demo\UserController@sendcode');
+//Route::post('useradd','Demo\UserController@useradd');
+//Route::get('login','Demo\UserController@login');
+//Route::post('logindo','Demo\UserController@logindo');
+//Route::any('userlist','Demo\UserController@userlist');
