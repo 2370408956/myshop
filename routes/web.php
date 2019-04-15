@@ -80,13 +80,41 @@ Route::get('user/userpage','LoginController@userpage');
 Route::get('VerifierController/verifier','VerifierController@verifier');
 
 
-Route::prefix('demo')->group(function(){
-    Route::any('index','DemoController@index');
-});
+//Route::prefix('demo')->group(function(){
+//    Route::any('index','DemoController@index');
+//});
 Route::get('test','DemoController@test');
 
+Route::any('wechat','Wechat\WechatController@checksign');
+Route::any('wechat/up','Wechat\\MaterialController@index');
+Route::any('wechat/updo','Wechat\\MaterialController@updo');
+
+Route::prefix('admin')->group(function(){
+    Route::get('index',"Admin\\SubstribeController@index");
+    Route::any('indexdo',"Admin\\SubstribeController@indexdo");
+    Route::get('wetype',"Admin\\SubstribeController@wetype");
+    Route::get('wetype',"Admin\\SubstribeController@wetype");
+    Route::any('wetypedo',"Admin\\SubstribeController@wetypedo");
+    Route::any('menu',"Admin\\MenuController@menu");
+    Route::any('getmenulist',"Admin\\MenuController@getmenulist");
+    Route::any('addmenudo',"Admin\\MenuController@addmenudo");
+    Route::any('getmenuinfo',"Admin\\MenuController@getmenuinfo");
+    Route::any('menudel',"Admin\\MenuController@menudel");
+    Route::any('menuindex',"Admin\\MenuController@menuindex");
+    Route::any('menuindexadd',"Admin\\MenuController@menuindexadd");
+    Route::any('menuindexado',"Admin\\MenuController@menuindexado");
+    Route::any('menuinfo',"Admin\\MenuController@menuinfo");
+    Route::any('menuadddo',"Admin\\MenuController@menuadddo");
+});
+route::get('admin',"Admin\\AdminController@index");
 
 
+route::prefix('demo')->group(function(){
+    Route::any('index','Demo\\DemoController@index');
+    Route::any('check','Demo\\DemoController@check');
+    Route::any('indexadd','Demo\\DemoController@indexadd');
+    Route::any('addmenu','Demo\\DemoController@addmenu');
+});
 
 //Route::get('index','Demo\UserController@index');
 //Route::get('sendcode','Demo\UserController@sendcode');

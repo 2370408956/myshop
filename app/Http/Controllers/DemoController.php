@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Model\Goods;
+use App\Model\Wechat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 class DemoController extends Controller
 {
-    public function test()
+    public function test(Request $request)
     {
-//        Cache::put('name','1111',10);
-//        echo Cache::get('name');
+
+//        print_r($data);
     }
 
     public function index(Request $request)
@@ -30,8 +31,6 @@ class DemoController extends Controller
 //        echo Redis::get('name');die;
 //        var_dump(Redis::del('a'));die;
 //        Redis::flushdb();die;
-
-
 //        Redis
         if(Redis::exists($key)){
             echo 1;
